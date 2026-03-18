@@ -160,6 +160,33 @@ public class Heapsort {
             sortHeap(arr);         // Step 2: Sort (O(n log n)) - reuse the same sorting method
             return arr;
         }
+
+        // ================ TESTING AND VERIFICATION =====================
+
+        private static void testWithSmallArray(){
+            System.out.println("\n=== TEST WITH SMALL ARRAY ===");
+            String[] smallTest = {"zebra", "apple", "monkey", "dog", "cat", "ball", "elephant"};
+            System.out.println("Original array: " + Arrays.toString(smallTest));
+
+            String[] bottomUpResult = sortBottomUp(smallTest);
+            System.out.println("Bottom-up sorted: " + Arrays.toString(bottomUpResult));
+
+            String[] topDownResult = sortTopDown(smallTest);
+            System.out.println("Top-down sorted:  " + Arrays.toString(topDownResult));
+
+            boolean identical = Arrays.equals(bottomUpResult, topDownResult);
+            System.out.println("Both methods produce " + (identical ? "IDENTICAL" : "DIFFERENT") + " results.");
+        }
+        // verifying if the array is properly sorted
+
+        private static boolean isSorted(String[] arr){
+            for (int i = 0; i < arr.length - 1; i++) {
+                if (arr[i].compareTo(arr[i + 1]) > 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 }
