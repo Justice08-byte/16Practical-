@@ -187,6 +187,96 @@ public class Heapsort {
             }
             return true;
         }
+
+        // ===================== MAIN METHOD =========================
+
+        public static void main(String[] args){
+            System.out.println("========================================");
+            System.out.println("HEAP SORT IMPLEMENTATION");
+            System.out.println("Bottom-up vs Top-down Heap Construction");
+            System.out.println("========================================");
+
+            // --- Part (c): Test with a small array first ---
+            testWithSmallArray();
+
+            // --- Part (d) and (e): Timings on the big dataset ---
+            System.out.println("\n========================================");
+            System.out.println("TIMINGS ON ULYSSES DATASET");
+            System.out.println("========================================");
+
+            // Load the words from the Ulysses file
+            String filename = "joyce1922_ulysses-1.text";
+            System.out.println("\nLoading words from: " + filename);
+            System.out.println("This may take a moment for the full Ulysses text...");
+
+            long loadStartTime = System.currentTimeMillis();
+            ArrayList<String> wordList = WordCleaner.cleanFile(filename);
+            long loadEndTime = System.currentTimeMillis();
+
+            if (wordList.isEmpty()) {
+                System.err.println("\nNo words loaded. Please check that '" + filename + "' exists.");
+                System.err.println("Current directory: " + System.getProperty("user.dir"));
+                return;
+            }
+            // Convert ArrayList to array
+            String[] originalArray = wordList.toArray(new String[0]);
+            System.out.printf("Loading time: %.3f seconds%n", (loadEndTime - loadStartTime) / 1000.0);
+            System.out.println("Total words to sort: " + originalArray.length);
+
+            // Timing Bottom-Up
+            System.out.println("\n[1] Running BOTTOM-UP heap sort...");
+            System.gc(); // Suggest garbage collection
+            long startTime = System.nanoTime();
+            String[] sortedBottomUp = sortBottomUp(arrayForBottomUp);
+            long endTime = System.nanoTime();
+            long durationBottomUp = endTime - startTime;
+
+            // Verify bottom-up result is sorted
+            boolean bottomUpSorted = isSorted(sortedBottomUp);
+
+            // Timing Top-Down
+            System.out.println("[2] Running TOP-DOWN heap sort...");
+            System.gc(); // Suggest garbage collection
+            startTime = System.nanoTime();
+            String[] sortedTopDown = sortTopDown(arrayForTopDown);
+            endTime = System.nanoTime();
+            long durationTopDown = endTime - startTime;
+
+            // Verify top-down result is sorted
+            boolean topDownSorted = isSorted(sortedTopDown);
+
+            // --- Part (e): Display timings clearly ---
+            System.out.println("\n========================================");
+            System.out.println("TIMING RESULTS");
+            System.out.println("========================================");
+            System.out.printf("Bottom-up heap sort:  %.3f ms%n", durationBottomUp / 1e6);
+            System.out.printf("Top-down heap sort:    %.3f ms%n", durationTopDown / 1e6);
+
+            // Verification
+            System.out.println("\n========================================");
+            System.out.println("VERIFICATION");
+            System.out.println("========================================");
+            System.out.println("Bottom-up result correctly sorted: " + (bottomUpSorted ? "YES" : "NO"));
+            System.out.println("Top-down result correctly sorted:   " + (topDownSorted ? "YES" : "NO"));
+
+            // Display sample of sorted words
+            System.out.println("\n========================================");
+            System.out.println("SAMPLE OF SORTED WORDS (first 20)");
+            System.out.println("========================================");
+            String[] first20 = Arrays.copyOfRange(sortedBottomUp, 0, Math.min(20, sortedBottomUp.length));
+            for (int i = 0; i < first20.length; i++) {
+                System.out.printf("%3d: %s%n", i+1, first20[i]);
+            }
+
+            System.out.println("\n========================================");
+            System.out.println("SAMPLE OF SORTED WORDS (last 20)");
+            System.out.println("========================================");
+            int start = Math.max(0, sortedBottomUp.length - 20);
+            String[] last20 = Arrays.copyOfRange(sortedBottomUp, start, sortedBottomUp.length);
+            for (int i = 0; i < last20.length; i++) {
+                System.out.printf("%3d: %s%n", start + i + 1, last20[i]);
+            }
+        }
     }
 
 }
