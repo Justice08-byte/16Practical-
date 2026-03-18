@@ -98,6 +98,35 @@ public class Heapsort {
                 heapifyUp(arr, parent);
             }
         }
+        // ============= HEAP CONSTRUCTION METHODS ================
+
+        // Heap from the bottom up
+
+        private static void buildHeapBottomUp(String[] arr){
+            int n = arr.length;
+            // Start from the last non-leaf node and heapify down
+            for (int i = n / 2 - 1; i >= 0; i--) {
+                heapifyDown(arr, n, i);
+            }
+        }
+
+        // Heap from top-down
+        private static void buildHeapTopDown(String[] arr){
+            int n = arr.length;
+            // The heap starts empty (size 0) and grows
+            for (int heapSize = 1; heapSize < n; heapSize++) {
+                // Bubble up the new element at index heapSize
+                int current = heapSize;
+                int parent = (current - 1) / 2;
+
+                // Bubble up the new element
+                while (current > 0 && arr[current].compareTo(arr[parent]) > 0) {
+                    swap(arr, current, parent);
+                    current = parent;
+                    parent = (current - 1) / 2;
+                }
+            }
+        }
     }
 
 }
