@@ -42,7 +42,23 @@ public class Heapsort {
             return words;
 
         }
+        //cleaning the words by removing punctuations or non-alphabetical words
+        private static String cleanWord(String word){
+            // Remove all non-alphabetic characters
+            return word.replaceAll("[^a-z]", "");
+        }
+        // Test method to see if the cleaner works
+        public static void main(String[] args){
+            // Test with a small sample
+            String testLine = "Hello, world! This is a test: don't forget the apostrophes.";
+            String[] testWords = testLine.toLowerCase().split("\\s+");
 
+            System.out.println("Testing word cleaner:");
+            for(String word: testWords){
+                String cleaned = cleanWord(word);
+                System.out.println("  '" + word + "' -> '" + cleaned + "'");
+            }
+        }
 
     }
 
