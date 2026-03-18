@@ -245,7 +245,7 @@ import java.util.*;
             // Verify top-down result is sorted
             boolean topDownSorted = isSorted(sortedTopDown);
 
-            // --- Part (e): Display timings clearly ---
+            // --- Part (e): Display timings clearly ---//
             System.out.println("\n========================================");
             System.out.println("TIMING RESULTS");
             System.out.println("========================================");
