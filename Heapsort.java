@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Heapsort {
+
     // Word Cleaner - reads and cleans words from a file
     class Wordcleaner {
         public static ArrayList<String> cleanFile(String filename) {
@@ -206,15 +206,15 @@ public class Heapsort {
 
             // Load the words from the Ulysses file
             String filename = "joyce1922_ulysses-1.text";
-            System.out.println("\nLoading words from: " + filename);
+            System.out.println("\nLoading words from: " + "joyce1922_ulysses-1.text");
             System.out.println("This may take a moment for the full Ulysses text...");
 
             long loadStartTime = System.currentTimeMillis();
-            ArrayList<String> wordList = WordCleaner.cleanFile(filename);
+            ArrayList<String> wordList = Wordcleaner.cleanFile("joyce1922_ulysses-1.text");
             long loadEndTime = System.currentTimeMillis();
 
             if (wordList.isEmpty()) {
-                System.err.println("\nNo words loaded. Please check that '" + filename + "' exists.");
+                System.err.println("\nNo words loaded. Please check that '" + "joyce1922_ulysses-1.text" + "' exists.");
                 System.err.println("Current directory: " + System.getProperty("user.dir"));
                 return;
             }
@@ -227,7 +227,7 @@ public class Heapsort {
             System.out.println("\n[1] Running BOTTOM-UP heap sort...");
             System.gc(); // Suggest garbage collection
             long startTime = System.nanoTime();
-            String[] sortedBottomUp = sortBottomUp(arrayForBottomUp);
+            String[] sortedBottomUp = sortBottomUp(originalArray);
             long endTime = System.nanoTime();
             long durationBottomUp = endTime - startTime;
 
@@ -238,7 +238,7 @@ public class Heapsort {
             System.out.println("[2] Running TOP-DOWN heap sort...");
             System.gc(); // Suggest garbage collection
             startTime = System.nanoTime();
-            String[] sortedTopDown = sortTopDown(arrayForTopDown);
+            String[] sortedTopDown = sortTopDown(originalArray);
             endTime = System.nanoTime();
             long durationTopDown = endTime - startTime;
 
@@ -279,4 +279,3 @@ public class Heapsort {
         }
     }
 
-}
