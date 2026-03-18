@@ -61,5 +61,43 @@ public class Heapsort {
         }
 
     }
+    // tryHeapsort - implementation of a bottom-up and top-down construction
+    class tryHeapsort{
+
+        // ============== HEAP UTILITY METHODS ===============
+
+        /* Swap two elements in an array*/
+
+        private static void swap(String[] arr, int i, int j){
+            String temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        private static void heapifyDown(String[] arr, int n, int i){
+            int largest = i; // Initialize largest as root
+            int left = 2 * i + 1; // left child
+            int right = 2 * i + 2; // right child
+
+            // If left child is larger than root
+            if (right < n && arr[right].compareTo(arr[largest]) > 0) {
+                largest = right;
+            }
+            //If largest is not root
+            if (largest != i) {
+                swap(arr, i, largest);
+                // Recursively heapify the affected subtree
+                heapifyDown(arr, n, largest);
+            }
+        }
+        private static void heapifyUp(String[] arr, int i){
+            int parent = (i - 1) / 2;
+
+            if (i > 0 && arr[i].compareTo(arr[parent]) > 0) {
+                swap(arr, i, parent);
+                heapifyUp(arr, parent);
+            }
+        }
+    }
 
 }
