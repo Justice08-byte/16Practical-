@@ -127,6 +127,39 @@ public class Heapsort {
                 }
             }
         }
+
+        // ================== SORTING METHODS ===================
+
+        // The main sorting algorithm
+
+        private static void sortHeap(String[] arr){
+            int n = arr.length;
+
+            // One by one extract elements from heap
+            for (int i = n - 1; i > 0; i--) {
+                // Move current root to end
+                swap(arr, 0, i);
+                // call max heapify on the reduced heap
+                heapifyDown(arr, i, 0);
+            }
+        }
+
+        // Combined method for bottom-up approach
+
+        public static String[] sortBottomUp(String[] unsortedArray){
+            String[] arr = unsortedArray.clone(); // Work on a copy
+            buildHeapBottomUp(arr); // Step 1: Build heap (O(n))
+            sortHeap(arr);          // Step 2: Sort (O(n log n))
+            return arr;
+        }
+
+        // Combined method for Top-down approach
+        public static String[] sortTopDown(String[] unsortedArray){
+            String[] arr = unsortedArray.clone(); // Work on a copy
+            buildHeapTopDown(arr); // Step 1: Build heap (O(n log n))
+            sortHeap(arr);         // Step 2: Sort (O(n log n)) - reuse the same sorting method
+            return arr;
+        }
     }
 
 }
